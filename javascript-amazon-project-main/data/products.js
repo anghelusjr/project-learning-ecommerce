@@ -1,4 +1,19 @@
-const products = [
+export const products = [
+  {
+    id: "Id-admin-user1",
+    image: "images/products/backpack.jpg",
+    name: "Nigga bags",
+    rating: {
+      stars: 4.5,
+      count: 2000
+    },
+    priceCents: 5090,
+    keywords: [
+      "big black bags",
+      "black bags",
+      "bag"
+    ]
+  },
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
