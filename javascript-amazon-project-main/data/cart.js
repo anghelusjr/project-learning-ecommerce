@@ -1,4 +1,16 @@
-export const cart = [];
+export const cart = [{
+  id: "Id-admin-user1",
+  quantity: 2
+},
+{
+  id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
+  quantity: 37
+},
+{
+  id: "dd82ca78-a18b-4e2a-9250-31e67412f98d",
+  quantity: 10
+}
+];
 
 
 export function addToCart(productId, quantityValue ){
