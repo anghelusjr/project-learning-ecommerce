@@ -1,6 +1,5 @@
-import { cart } from '../data/cart.js';
+import { cart, removeCart } from '../data/cart.js';
 import { products } from '../data/products.js';
-import { formatCurrency } from './utils/money.js';
 
 let matchingItem;
 
@@ -27,7 +26,7 @@ cart.forEach((cartItem) =>{
                   ${product.name}
                 </div>
                 <div class="product-price">
-                  $${formatCurrency(product.priceCents)}
+                  $${product.priceCents / 100}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -36,7 +35,7 @@ cart.forEach((cartItem) =>{
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-link" data-delete-id = "${matchingItem}">
                     Delete
                   </span>
                 </div>
@@ -101,10 +100,11 @@ function genHTML(generatedHTML){
 }
 
 
-
-
-
-
-
-
-
+document.querySelectorAll('.js-delete-link').forEach((deleteLink) =>{
+deleteLink.addEventListener('click', () =>{
+  
+  const {deleteId} = deleteLink.dataset;
+  removeCart(deleteId);
+  console.log(cart);
+}) 
+})

@@ -1,4 +1,4 @@
-export const cart = [{
+export let cart = [{
   id: "Id-admin-user1",
   quantity: 2
 },
@@ -40,4 +40,17 @@ export function updateCartQuantity(){
 
    document.querySelector('.js-cart-quantity').innerHTML = quantity;
    console.log('Let quantity: ', quantity);
+}
+
+
+export function removeCart(cartId){
+  const newCartArray = [];
+
+  cart.forEach((cartItem) =>{
+    if(cartItem.id !== cartId){
+      newCartArray.push(cartItem);
+    }
+
+    cart = newCartArray;
+  });
 }
