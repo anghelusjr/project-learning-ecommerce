@@ -1,16 +1,29 @@
-export let cart = [{
-  id: "Id-admin-user1",
-  quantity: 2
-},
-{
-  id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
-  quantity: 37
-},
-{
-  id: "dd82ca78-a18b-4e2a-9250-31e67412f98d",
-  quantity: 10
-}
+export let cart = JSON.parse(localStorage.getItem('cart'));
+
+if(!cart){
+  cart = [{
+          id: "Id-admin-user1",
+          quantity: 2
+        },
+        {
+          id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
+          quantity: 37
+        },
+        {
+          id: "dd82ca78-a18b-4e2a-9250-31e67412f98d",
+          quantity: 10
+        }
 ];
+}
+
+
+
+
+
+
+function saveToStorage(){
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 
 export function addToCart(productId, quantityValue ){
@@ -23,19 +36,21 @@ export function addToCart(productId, quantityValue ){
    });
 
    if(matchingItem){
-    matchingItem.quantityValue += quantityValue;
+    matchingItem.quantity += quantityValue;
    }else{
     cart.push({
-      productId, quantityValue
+      id: productId, quantity: quantityValue
    });
    };
+
+   saveToStorage();
 }
 
 export function updateCartQuantity(){
   let quantity = 0;
 
    cart.forEach((cartItem) =>{
-   quantity += cartItem.quantityValue;
+   quantity += cartItem.quantity;
    })
 
    document.querySelector('.js-cart-quantity').innerHTML = quantity;
@@ -50,7 +65,7 @@ export function removeCart(cartId){
     if(cartItem.id !== cartId){
       newCartArray.push(cartItem);
     }
-
-    cart = newCartArray;
   });
+  cart = newCartArray;
+  saveToStorage();
 }
