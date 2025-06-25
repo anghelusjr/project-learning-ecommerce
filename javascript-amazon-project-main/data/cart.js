@@ -73,6 +73,7 @@ export function updateCartQuantity(){
 
   document.querySelector('.js-cart-quantity').innerHTML = quantity;
   saveToStorage();
+  return quantity;
 }
 
 
