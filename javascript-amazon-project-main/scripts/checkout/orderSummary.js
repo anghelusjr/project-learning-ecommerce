@@ -7,7 +7,7 @@ import {renderPaymentSummary} from './paymentSummary.js';
 
 
  export function renderOrderSummary(){
-      document.querySelector('.order-summary').innerHTML = '';
+      document.querySelector('.js-order-summary').innerHTML = '';
       updateCartQuantity();
 
       cart.forEach((cartItem) =>{
