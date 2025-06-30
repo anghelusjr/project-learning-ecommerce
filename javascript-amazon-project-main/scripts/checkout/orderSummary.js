@@ -38,7 +38,7 @@ import {renderPaymentSummary} from './paymentSummary.js';
                           ${matchingItem.name}
                         </div>
                         <div class="product-price">
-                          $${formatCurrency(matchingItem.priceCents)}}
+                          ${matchingItem.getPrice()}
                         </div>
                         <div class="product-quantity">
                           <span>
@@ -166,8 +166,7 @@ import {renderPaymentSummary} from './paymentSummary.js';
       document.querySelectorAll('.js-delivery-option').forEach((element) =>{
         element.addEventListener('click', () =>{
           const {productId, deliveryOptionId } = element.dataset;
-
-          console.log(deliveryOptionId);
+          
           updateDeliveryOption(productId, deliveryOptionId);
           renderOrderSummary();
           renderPaymentSummary();

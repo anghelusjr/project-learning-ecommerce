@@ -1,13 +1,14 @@
 
 class Cart{
   cartItems;
+  #localStorageKey;
 
     constructor(localStorageKey){
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
     }
-    loadFromStorage(){
-            this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+    #loadFromStorage(){
+            this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
             if(!this.cartItems){
               this.cartItems = [{
                       id: "Id-admin-user1",
@@ -26,7 +27,7 @@ class Cart{
               }
     }
     saveToStorage(){
-          localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+          localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
     addToCart(productId, quantityValue ){
             let matchingItem;
@@ -101,16 +102,9 @@ class Cart{
           this.saveToStorage();
     }
 }
-
-
   const cart = new Cart('cart-oop');
   const businessCart = new Cart('cart-business');
-  cart.addToCart('5968897c-4d27-4872-89f6-5bcb052746d7', 2);
-   cart.addToCart('d37a651a-d501-483b-aae6-a9659b0757a0', 2);
 
-  console.log(cart);
-  console.log(businessCart);
-  console.log(businessCart instanceof Cart);
 
 
 

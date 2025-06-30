@@ -4,8 +4,5 @@ import  isSatSun from './utils/is-weekend.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import '../data/cart-class.js';
 
-
 renderOrderSummary();
 renderPaymentSummary();
-console.log(dayjs().format('dddd, MMMM D'));
-console.log(isSatSun(dayjs().add(5, 'days')));
