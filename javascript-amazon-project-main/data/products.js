@@ -1,5 +1,6 @@
 import {formatCurrency} from '../scripts/utils/money.js';
 
+
 export function getProduct(productId){
    let matchingItem;
 
@@ -11,7 +12,8 @@ export function getProduct(productId){
 
     return matchingItem;
 }
-class Product{
+
+export class Product{
   id;
   image;
   name;
@@ -38,7 +40,7 @@ class Product{
   }
 
 }
-class Clothing extends Product{
+export class Clothing extends Product{
     sizeChartLink;
   
   constructor(productDetails){
@@ -52,6 +54,50 @@ class Clothing extends Product{
 
 
 }
+export class Appliance extends Product{
+  instructionLink;
+  warrantyLink;
+
+  constructor(productDetails){
+    super(productDetails);
+    this.instructionLink = productDetails.instructionLink;
+    this.warrantyLink = productDetails.warrantyLink;
+  }
+
+  extraInfoHtml(){
+    return `
+      <a href="${this.instructionLink}" target="_blank">Instruction</a>
+      <a href="${this.warrantyLink}" target="_blank">Warranty</a>
+    `;
+  }
+
+}
+
+export let products = [];
+
+
+export function loadProducts(fun = () => {}){
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', ()=>{
+   products = JSON.parse(xhr.response).map((productDetails) => {
+      if(productDetails.type === 'clothing'){
+        return new Clothing(productDetails);
+      }else if(productDetails.type === 'appliance'){
+        return new Appliance(productDetails);
+      }
+      return new Product(productDetails);
+      });
+
+      fun();
+   })
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
+
+loadProducts();
+
+/*
 export const products = [
   {
     id: "Id-admin-user1",
@@ -115,7 +161,7 @@ export const products = [
     sizeChartLink: "images/clothing-size-chart.png"
   },
   {
-    id: " ",
+    id: "54e0eccd-8f36-462b-b68a-8182611d9add",
     image: "images/products/black-2-slot-toaster.jpg",
     name: "2 Slot Toaster - Black",
     rating: {
@@ -127,7 +173,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -312,7 +361,10 @@ export const products = [
       "water boiler",
       "appliances",
       "kitchen"
-    ]
+    ],
+    type: 'appliance',
+    instructionLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
@@ -617,7 +669,10 @@ export const products = [
       "coffeemakers",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "02e3a47e-dd68-467e-9f71-8bf6f723fdae",
@@ -677,7 +732,10 @@ export const products = [
       "food blenders",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "36c64692-677f-4f58-b5ec-0dc2cf109e27",
@@ -730,6 +788,9 @@ export const products = [
 
   if(productDetails.type === 'clothing'){
     return new Clothing(productDetails);
+  }else if(productDetails.type === 'appliance'){
+    return new Appliance(productDetails);
   }
   return new Product(productDetails);
 });
+*/
