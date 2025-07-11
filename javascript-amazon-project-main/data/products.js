@@ -90,12 +90,11 @@ export function loadProducts(fun = () => {}){
       });
 
       fun();
+      console.log('load products');
    })
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
-
-loadProducts();
 
 /*
 export const products = [

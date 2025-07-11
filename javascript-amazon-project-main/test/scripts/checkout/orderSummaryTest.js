@@ -6,8 +6,8 @@ import { loadProducts } from '../../../data/products.js';
 
 
 describe('Test suites: Product Inside of The Cart', () =>{
-  const productId2 = '3ebe75dc-64d2-4137-8860-1f5a963e534b';
-  const productId3 = 'dd82ca78-a18b-4e2a-9250-31e67412f98d';
+  const productId1 = '3ebe75dc-64d2-4137-8860-1f5a963e534b';
+  const productId2 = 'dd82ca78-a18b-4e2a-9250-31e67412f98d';
 
 
   beforeAll((done)=>{
@@ -19,11 +19,7 @@ describe('Test suites: Product Inside of The Cart', () =>{
 
   beforeEach(() =>{
     spyOn(localStorage, 'getItem').and.callFake(() =>{
-      return JSON.stringify([{
-          id: "Id-admin-user1",
-          quantity: 2,
-          deliveryOptionId: '3'
-        },
+      return JSON.stringify([
         {
           id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
           quantity: 37,
@@ -38,12 +34,12 @@ describe('Test suites: Product Inside of The Cart', () =>{
   });
 
   it('Checking Default Cart Item', () =>{
-    expect(cart[0].id).toEqual(productId2);
-     expect(cart[1].id).toEqual(productId3);
+    expect(cart[0].id).toEqual(productId1);
+    expect(cart[1].id).toEqual(productId2);
   });
 
   it('Getting Product Inside The Cart', () =>{
-    expect(getProduct(productId2).id).toEqual(cart[0].id);
-    expect(getProduct(productId3).id).toEqual(cart[1].id);
+    expect(getProduct(productId1).id).toEqual(cart[0].id);
+    expect(getProduct(productId2).id).toEqual(cart[1].id);
   });
 })
