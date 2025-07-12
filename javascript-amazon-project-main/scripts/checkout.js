@@ -8,8 +8,21 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 //import '../data/backend-practice.js';
 
 
+// try{
+//   doesNotExist();
+//   console.log('This is try console');
+// }catch{
+//   console.log('this is error console.');
+// }
+
+
 
 async function loadPage(){
+
+try{
+
+  throw 'error error 1111';
+
   await loadProductsFetch();
   await new Promise((resolve) =>{
       loadCart(() =>{
@@ -17,11 +30,16 @@ async function loadPage(){
       });
    });
 
+} catch(err){
+  console.log('Unexpected error. Please try again later.');
+  console.log(err);
+}
+
+  
   renderOrderSummary();
   renderPaymentSummary();
 }
 loadPage();
-
 
 // loadPage().then((value) =>{
 //   console.log('next step!!!!')
