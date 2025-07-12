@@ -1,6 +1,6 @@
 import {renderOrderSummary} from '../../../scripts/checkout/orderSummary.js'
 import { cart} from '../../../data/cart.js'
-import { getProduct } from '../../../data/products.js';
+import { getProduct, loadProductsFetch } from '../../../data/products.js';
 import { deliveryOptions } from '../../../data/deliveryOption.js';
 import { loadProducts } from '../../../data/products.js';
 
@@ -11,9 +11,9 @@ describe('Test suites: Product Inside of The Cart', () =>{
 
 
   beforeAll((done)=>{
-    loadProducts(() =>{
+    loadProductsFetch().then(() =>{
       done();
-    });
+    })
   });
 
 

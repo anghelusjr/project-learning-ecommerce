@@ -1,6 +1,6 @@
 import {renderOrderSummary} from './checkout/orderSummary.js';
 import { renderPaymentSummary } from './checkout/paymentSummary.js';
-import { loadProducts } from '../data/products.js';
+import { loadProducts, loadProductsFetch} from '../data/products.js';
 import {loadCart} from '../data/cart.js';
 import  isSatSun from './utils/is-weekend.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
@@ -8,11 +8,7 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 //import '../data/backend-practice.js';
 
 Promise.all([
-    new Promise((resolve)=>{
-    loadProducts(() =>{
-      resolve('value1');
-    })
-  }),
+    loadProductsFetch(),
   new Promise((resolve) =>{
       loadCart(() =>{
         resolve()
