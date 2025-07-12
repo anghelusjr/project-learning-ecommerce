@@ -14,6 +14,8 @@ import {renderPaymentSummary} from './paymentSummary.js';
         const cartId = cartItem.id;
         let generatedHTML = '';
         const matchingItem = getProduct(cartId);
+
+        console.log(matchingItem);  
         
             const deliveryOptionId = cartItem.deliveryOptionId;
             const deliveryOption = getDeliveryOption(deliveryOptionId); 

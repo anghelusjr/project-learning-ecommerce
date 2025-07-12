@@ -20,9 +20,6 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 async function loadPage(){
 
 try{
-
-  throw 'error error 1111';
-
   await loadProductsFetch();
   await new Promise((resolve) =>{
       loadCart(() =>{
