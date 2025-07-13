@@ -2,6 +2,7 @@ import { cart } from '../../data/cart.js';
 import { formatCurrency } from '../utils/money.js';
 import { getProduct } from '../../data/products.js';
 import { getDeliveryOption } from '../../data/deliveryOption.js';
+import { addOrder, orders } from '../../data/orders.js';
 
 export function renderPaymentSummary() {
   let productPriceCents = 0;
@@ -49,13 +50,22 @@ export function renderPaymentSummary() {
   document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
 
   document.querySelector('.js-place-order').addEventListener('click', async () => {
-    const response = await fetch('https://supersimplebackend.dev/orders', {
+    try{
+      const response = await fetch('https://supersimplebackend.dev/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cart: cart })
     });
 
     const order = await response.json();
-    console.log(order);
+    addOrder(order);
+
+    console.log(orders);
+    }catch(error){
+      console.log('Unexpected error. Try again later.');
+    }
+
+
+    window.location.href = 'orders.html';
   });
 }
