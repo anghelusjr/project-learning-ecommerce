@@ -10,10 +10,9 @@ describe('Test suites: Product Inside of The Cart', () =>{
   const productId2 = 'dd82ca78-a18b-4e2a-9250-31e67412f98d';
 
 
-  beforeAll((done)=>{
-    loadProductsFetch().then(() =>{
-      done();
-    })
+  beforeAll( async ()=>{
+   const response = await loadProductsFetch()
+   console.log(response);
   });
 
 
