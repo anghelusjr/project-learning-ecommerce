@@ -1,10 +1,16 @@
-.main {
-  max-width: 1100px;
-  padding-left: 30px;
-  padding-right: 30px;
+body, .main, .product-grid-item {
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #1e293b;
+  letter-spacing: 0.01em;
+}
 
-  margin-top: 140px;
-  margin-bottom: 100px;
+.main {
+  max-width: 1400px; /* wider main container */
+  padding-left: 40px;
+  padding-right: 40px;
+
+  margin-top: 100px;
+  margin-bottom: 80px;
 
   /* margin-left: auto;
      margin-right auto;
@@ -16,20 +22,18 @@
 
 .page-title {
   font-weight: 700;
-  font-size: 22px;
-  margin-bottom: 18px;
+  font-size: 2rem;
+  margin-bottom: 22px;
+  color: #1e293b;
+  text-align: left;
+  letter-spacing: 0.01em;
 }
 
 .checkout-grid {
   display: grid;
-  /* Here, 1fr means the first column will take
-     up the remaining space in the grid. */
   grid-template-columns: 1fr 350px;
-  column-gap: 12px;
-
-  /* Use align-items: start; to prevent the elements
-     in the grid from stretching vertically. */
-  align-items: start;
+  column-gap: 32px;
+  align-items: center; /* vertical center */
 }
 
 @media (max-width: 1000px) {
@@ -54,26 +58,32 @@
 }
 
 .payment-summary {
-  padding-bottom: 5px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  max-width: 400px; /* make it wider */
+  width: 100%;      /* allow to expand in grid */
+  box-sizing: border-box;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   .payment-summary {
-    /* grid-row: 1 means this element will be placed into row
-      1 in the grid. (Normally, the row that an element is
-      placed in is determined by the order of the elements in
-      the HTML. grid-row overrides this default ordering). */
-    grid-row: 1;
-    margin-bottom: 12px;
+    max-width: 100%;
+    min-width: 0;
+    margin: 32px auto 0 auto;
   }
 }
 
 .delivery-date {
-  color: rgb(0, 118, 0);
+  color: #059669;
   font-weight: 700;
-  font-size: 19px;
+  font-size: 1.1rem;
   margin-top: 5px;
   margin-bottom: 22px;
+  letter-spacing: 0.01em;
 }
 
 .cart-item-details-grid {
@@ -110,9 +120,10 @@
 }
 
 .product-price {
-  color: rgb(177, 39, 4);
+  color: #1d4ed8;
   font-weight: 700;
   margin-bottom: 5px;
+  letter-spacing: 0.01em;
 }
 
 .product-quantity .link-primary {
@@ -137,6 +148,9 @@
 .delivery-options-title {
   font-weight: 700;
   margin-bottom: 10px;
+  font-size: 1rem;
+  color: #1e293b;
+  letter-spacing: 0.01em;
 }
 
 .delivery-option {
@@ -152,35 +166,32 @@
 }
 
 .delivery-option-date {
-  color: rgb(0, 118, 0);
+  color: #059669;
   font-weight: 500;
   margin-bottom: 3px;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
 }
 
 .delivery-option-price {
-  color: rgb(120, 120, 120);
-  font-size: 15px;
+  color: #64748b;
+  font-size: 0.97rem;
+  letter-spacing: 0.01em;
 }
 
 .payment-summary-title {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 1.25rem;
   margin-bottom: 12px;
+  color: #1e293b;
+  letter-spacing: 0.01em;
 }
 
 .payment-summary-row {
-  display: grid;
-  /* 1fr auto; means the width of the 2nd column will be
-     determined by the elements inside the column (auto).
-     The 1st column will take up the remaining space. */
-  grid-template-columns: 1fr auto;
-
-  font-size: 15px;
+  font-size: 1.05rem;
   margin-bottom: 9px;
-}
-
-.payment-summary-money {
-  text-align: right;
+  color: #334155;
+  letter-spacing: 0.01em;
 }
 
 .subtotal-row .payment-summary-money {
@@ -192,12 +203,12 @@
 }
 
 .total-row {
-  color: rgb(177, 39, 4);
+  color: #b12704;
   font-weight: 700;
-  font-size: 18px;
-
+  font-size: 1.25rem;
   border-top: 1px solid rgb(222, 222, 222);
   padding-top: 18px;
+  letter-spacing: 0.01em;
 }
 
 .place-order-button {
@@ -208,7 +219,42 @@
 
   margin-top: 11px;
   margin-bottom: 15px;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: center;
 }
+
+.product-grid-action button,
+.place-order-button {
+  background: #333;      /* button background is dark */
+  color: #fff;           /* text color is white */
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Remove hover effect */
+.product-grid-action button:hover,
+.place-order-button:hover {
+  background: #333;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.payment-summary-title,
+.payment-summary-row,
+.payment-summary-money,
+.total-row,
+.place-order-button {
+  text-align: center;
+}
+
 .quantity-input{
   width: 30px;
   display: none;
@@ -235,4 +281,118 @@
   border-top: 1px solid #ddd;
   text-align: center;
   font-family: 'Roboto', sans-serif;
+}
+.product-grid-item {
+  background: #fff; /* white background for the product box */
+  border: 2px solid #3b82f6; /* blue border */
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.08); /* blue shadow */
+  padding: 28px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.product-grid-item:hover {
+  border-color: #2563eb; /* darker blue on hover */
+  box-shadow: 0 4px 16px rgba(59,130,246,0.15);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.product-grid-image {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: none;
+  background: transparent;
+}
+
+.product-grid-name {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #2563eb;
+  margin-bottom: 8px;
+  text-align: center;
+  margin-top: 0;
+  letter-spacing: 0.02em;
+}
+
+.product-grid-price {
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.product-grid-details {
+  font-size: 1.05rem;
+  color: #3b82f6;
+  margin-bottom: 12px;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.product-grid-action {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.product-grid-action button {
+  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.product-grid-action button:hover {
+  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns for desktop */
+  gap: 40px;
+  margin: 40px 0;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .main {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  .product-grid {
+    grid-template-columns: 1fr; /* single column for mobile */
+    gap: 20px;
+  }
+  .page-title {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  .product-grid-name,
+  .product-grid-price,
+  .product-grid-details,
+  .delivery-date,
+  .delivery-options-title,
+  .delivery-option-date,
+  .payment-summary-title,
+  .total-row {
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    text-align: center;
+  }
 }

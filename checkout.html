@@ -2,19 +2,11 @@
 <html>
   <head>
     <title>Checkout</title>
-
-    <!-- This code is needed for responsive design to work.
-      (Responsive design = make the website look good on
-      smaller screen sizes like a phone or a tablet). -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A frontend web project created for educational purposes only. No real shopping or transactions.">
-
-    <!-- Load a font called Roboto from Google Fonts. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Here are the CSS files for this page. -->
     <link rel="stylesheet" href="styles/shared/general.css">
     <link rel="stylesheet" href="styles/pages/checkout/checkout-header.css">
     <link rel="stylesheet" href="styles/pages/checkout/checkout.css">
@@ -29,12 +21,10 @@
             <img class="site-mobile-logo" src="images/logo.jpg">
           </a>
         </div>
-
         <div class="checkout-header-middle-section">
           Checkout (<a class="return-to-home-link js-return-to-home-link"
             href="index.html"></a>)
         </div>
-
         <div class="checkout-header-right-section">
           <img src="images/icons/checkout-lock-icon.png">
         </div>
@@ -43,23 +33,18 @@
 
     <div class="main">
       <div class="page-title">Review your order</div>
-
       <div class="checkout-grid">
         <div class="order-summary js-order-summary">
+          <!-- Product grid will be rendered by JavaScript -->
         </div>
-
         <div class="payment-summary js-payment-summary">
-    
+          <!-- Payment summary will be rendered by JavaScript -->
         </div>
       </div>
     </div>
     <div class="disclaimer">
-    <strong>Disclaimer:</strong> This is a personal project created for educational and portfolio purposes only. It is not an actual online store and is not affiliated with any brand.
+      <strong>Disclaimer:</strong> This is a personal project created for educational and portfolio purposes only. It is not an actual online store and is not affiliated with any brand.
     </div>
-
-    <!-- /* This is for learning purposes no transaction occur on this ecommerce */ -->
-
-
     <script type="module" src="scripts/checkout.js"></script>
   </body>
 </html>

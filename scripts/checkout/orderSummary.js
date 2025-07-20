@@ -9,9 +9,11 @@ export function renderOrderSummary() {
   document.querySelector('.js-order-summary').innerHTML = '';
   updateCartQuantity();
 
+  // Start the grid container
+  let gridHTML = '<div class="product-grid">';
+
   cart.forEach((cartItem) => {
     const cartId = cartItem.productId;
-    let generatedHTML = '';
     const matchingItem = getProduct(cartId);
 
     const deliveryOptionId = cartItem.deliveryOptionId;
@@ -21,37 +23,32 @@ export function renderOrderSummary() {
     const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
     const dateString = deliveryDate.format('dddd, MMMM D');
 
-    generatedHTML += `
-      <div class="cart-item-container-${matchingItem.id} js-cart-item-container-id-${matchingItem.id}">
-        <div class="delivery-date">Delivery date: ${dateString}</div>
-
-        <div class="cart-item-details-grid">
-          <img class="product-image" src="${matchingItem.image}">
-
-          <div class="cart-item-details">
-            <div class="product-name">${matchingItem.name}</div>
-            <div class="product-price">${matchingItem.getPrice()}</div>
-            <div class="product-quantity">
-              <span>
-                Quantity: <span class="quantity-label js-quantity-label-${matchingItem.id}">${cartItem.quantity}</span>
-              </span>
-              <span class="update-quantity-link link-primary js-update-quantity-link" data-update-id="${matchingItem.id}">Update</span>
-              <input class="quantity-input js-quantity-input-${matchingItem.id}">
-              <span class="save-quantity-link link-primary" data-save-id="${matchingItem.id}">Save</span>
-              <span class="delete-quantity-link link-primary js-delete-link" data-delete-id="${matchingItem.id}">Delete</span>
-            </div>
-          </div>
-
-          <div class="delivery-options">
-            <div class="delivery-options-title">Choose a delivery option:</div>
-            ${deliveryDateHTML(matchingItem, cartItem)}
-          </div>
+    gridHTML += `
+      <div class="product-grid-item cart-item-container-${matchingItem.id} js-cart-item-container-id-${matchingItem.id}">
+        <img class="product-grid-image" src="${matchingItem.image}">
+        <div class="product-grid-name">${matchingItem.name}</div>
+        <div class="product-grid-price">${matchingItem.getPrice()}</div>
+        <div class="product-grid-details">${matchingItem.details || ''}</div>
+        <div class="product-quantity">
+          <span>
+            Quantity: <span class="quantity-label js-quantity-label-${matchingItem.id}">${cartItem.quantity}</span>
+          </span>
+          <span class="update-quantity-link link-primary js-update-quantity-link" data-update-id="${matchingItem.id}">Update</span>
+          <input class="quantity-input js-quantity-input-${matchingItem.id}">
+          <span class="save-quantity-link link-primary" data-save-id="${matchingItem.id}">Save</span>
+          <span class="delete-quantity-link link-primary js-delete-link" data-delete-id="${matchingItem.id}">Delete</span>
+        </div>
+        <div class="delivery-options">
+          <div class="delivery-options-title">Choose a delivery option:</div>
+          ${deliveryDateHTML(matchingItem, cartItem)}
         </div>
       </div>
     `;
-
-    genHTML(generatedHTML);
   });
+
+  gridHTML += '</div>'; // Close the grid container
+
+  document.querySelector('.order-summary').innerHTML = gridHTML;
 
   function deliveryDateHTML(matchingItem, cartItem) {
     let html = '';
@@ -77,11 +74,6 @@ export function renderOrderSummary() {
     });
 
     return html;
-  }
-
-  function genHTML(generatedHTML) {
-    const checkoutGridElement = document.querySelector('.order-summary');
-    checkoutGridElement.innerHTML += generatedHTML;
   }
 
   document.querySelectorAll('.js-delete-link').forEach((deleteLink) => {
