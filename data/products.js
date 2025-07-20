@@ -99,6 +99,8 @@ export function loadProductsFetch(){
   return promise;
 }
 
+ /* This is for learning purposes no transaction occur on this ecommerce */ 
+
 
 // loadProductsFetch().then(() =>{
 //   console.log('next step');
