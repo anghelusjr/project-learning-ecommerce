@@ -14,6 +14,8 @@ async function loadPage(){
 
 loadPage();
 
+// This is for learning purposes no transaction occur on this ecommerce
+
 // loadPage().then((value) =>{
 //   console.log('next step!!!!')
 //   console.log(value);
