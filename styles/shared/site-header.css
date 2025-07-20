@@ -202,7 +202,7 @@ a, .header-link, .orders-link, .cart-link, .product-rating-count {
 }
 
 .site-logo {
-  width: 100px;
+  width: 35px;
   margin-top: 5px;
 }
 
@@ -264,7 +264,9 @@ a, .header-link, .orders-link, .cart-link, .product-rating-count {
   width: 180px;
   flex-shrink: 0;
   display: flex;
-  justify-content: end;
+  justify-content: center;
+  align-items: center;
+  text-align: end;
 }
 
 .orders-link {
