@@ -79,4 +79,13 @@
   border-radius: 50px;
   width: 50%;
 }
+.disclaimer {
+  background-color: #0b1e40;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 60px 20px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
 /* This is for learning purposes no transaction occur on this ecommerce */
