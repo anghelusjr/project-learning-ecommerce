@@ -8,7 +8,7 @@ import {formatCurrency} from './utils/money.js';
       await loadProductsFetch();
       renderOrderSummary();
     } catch(err){
-      console.log('Unexpected error. Please try again later.');
+      console.log('Unexpected error. Please try again later.', err);
     }
   }
 

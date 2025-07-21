@@ -174,7 +174,7 @@ a, .header-link, .orders-link, .cart-link, .product-rating-count {
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 80px;
 }
 
 .site-header-left-section {
@@ -202,7 +202,7 @@ a, .header-link, .orders-link, .cart-link, .product-rating-count {
 }
 
 .site-logo {
-  width: 35px;
+  width: 50px;
   margin-top: 5px;
 }
 
@@ -305,12 +305,12 @@ a, .header-link, .orders-link, .cart-link, .product-rating-count {
 }
 
 .cart-quantity {
-  color: #f08804; /* orange */
+  color: #ffffff; /* orange */
   font-size: 16px;
   font-weight: 700;
   position: absolute;
   top: 4px;
-  left: 22px;
+  right: 10px;
   width: 26px;
   text-align: center;
 }
