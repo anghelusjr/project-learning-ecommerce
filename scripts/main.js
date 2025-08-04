@@ -86,4 +86,21 @@ function renderProductsGrid(){
             updateCartQuantity();
           })
       })
-}
+
+      const searchInpuElem = document.querySelector('.js-search-bar');
+      const searchButtonElem =  document.querySelector('.search-button');
+      searchButtonElem.addEventListener('click', () =>{
+        productHTML = '';
+        const searchInputValue = searchInpuElem.value;
+
+       products.filter((product) =>{
+          const isProductName = product.name.toLowerCase();
+          const searchValue = searchInputValue.toLowerCase()
+          
+          const foundItem = isProductName.includes(searchValue);
+          
+        })
+
+      })
+
+    }
