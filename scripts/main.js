@@ -62,11 +62,16 @@ function renderProductsGrid(){
                 </div>`);
         }
 
+        function reRenderHTML(productHTML){
+          return document.querySelector('.js-product-grid').innerHTML = productHTML;
+        }
+
         products.forEach((product) =>{
 
           productHTML += renderProductItem(product);
         })
-        document.querySelector('.js-product-grid').innerHTML = productHTML;
+
+        reRenderHTML(productHTML);
         const clearIDs = {};
         document.querySelectorAll('.js-add-to-cart-button').forEach((button) =>{
           button.addEventListener('click', () =>{
@@ -101,20 +106,23 @@ function renderProductsGrid(){
           const searchValue = searchInputValue.toLowerCase().trim();
           const foundItem = isProductName.includes(searchValue);
 
+          console.log(searchValue);
 
-            if(searchValue === ''){
-              productHTML = `
-                <div>
-                  <h3>No product Found</h3>
-                </div>`
+            if(!searchValue){
+                productHTML = `
+                  <div class ="no-found-item">
+                    <h3>No product Found</h3>
+                  </div>`
+
+            reRenderHTML(productHTML);
+            return;
             }
 
             if(foundItem){
-              
               productHTML += renderProductItem(product)
-            
+              reRenderHTML(productHTML);
             }
-          document.querySelector('.js-product-grid').innerHTML = productHTML;
+        
          
         })
 

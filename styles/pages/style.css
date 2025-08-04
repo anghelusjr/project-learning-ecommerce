@@ -171,4 +171,14 @@ a, .header-link, .orders-link, .cart-link, .product-rating-count {
   font-family: 'Roboto', sans-serif;
 }
 
+.no-found-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  width: 100vw;
+  font-size: 25px;
+  color: gray;
+}
+
 /* This is for learning purposes no transaction occur on this ecommerce */
