@@ -244,13 +244,14 @@ a, .header-link, .orders-link, .cart-link, .product-rating-count {
 }
 
 .search-button {
-  background-color: #1a3d7c; /* darker blue */
+  background-color: transparent;
   border: none;
   width: 45px;
   height: 40px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   flex-shrink: 0;
+  cursor: auto;
 }
 
 .search-icon {

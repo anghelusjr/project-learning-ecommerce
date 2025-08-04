@@ -65,13 +65,18 @@ function renderProductsGrid(){
         function reRenderHTML(productHTML){
           return document.querySelector('.js-product-grid').innerHTML = productHTML;
         }
+        
+        function allProductsRendering(){
+            products.forEach((product) =>{
 
-        products.forEach((product) =>{
+            productHTML += renderProductItem(product);
+          })
+        }
 
-          productHTML += renderProductItem(product);
-        })
-
+        allProductsRendering();
         reRenderHTML(productHTML);
+
+
         const clearIDs = {};
         document.querySelectorAll('.js-add-to-cart-button').forEach((button) =>{
           button.addEventListener('click', () =>{
@@ -92,40 +97,51 @@ function renderProductsGrid(){
 
             addToCart(productId, quantityValue);
             updateCartQuantity();
-          })
+          })  
       })
 
       const searchInpuElem = document.querySelector('.js-search-bar');
-      const searchButtonElem =  document.querySelector('.search-button');
-      searchButtonElem.addEventListener('click', () =>{
-      const searchInputValue = searchInpuElem.value;
-      let productHTML = '';
 
-       products.filter((product) =>{
-          const isProductName = product.name.toLowerCase().trim();
-          const searchValue = searchInputValue.toLowerCase().trim();
-          const foundItem = isProductName.includes(searchValue);
+      function productSearchBar(){
+        const trimmedSearch = searchInpuElem.value.toLowerCase().trim();
+        let productHTML = '';
 
-          console.log(searchValue);
-
-            if(!searchValue){
-                productHTML = `
-                  <div class ="no-found-item">
-                    <h3>No product Found</h3>
-                  </div>`
-
-            reRenderHTML(productHTML);
-            return;
-            }
-
-            if(foundItem){
-              productHTML += renderProductItem(product)
-              reRenderHTML(productHTML);
-            }
+        if(!trimmedSearch){
+            productHTML = `
+              <div class ="no-found-item">
+                <h3>No product Found</h3>
+              </div>`
+          reRenderHTML(productHTML);
+          return;
+        }
         
-         
-        })
+        const filtered = products.filter((product) =>{
+        return product.name.toLowerCase().trim().includes(trimmedSearch);
+        })  
 
+        if(filtered.length > 0){
+          filtered.map((product) =>{
+            productHTML += renderProductItem(product);
+          })
+        }else{
+          productHTML =`
+            <div class ="no-found-item">
+              <h3>No product Found</h3>
+            </div>
+          `
+        }
+        reRenderHTML(productHTML);
+      }
+
+      searchInpuElem.addEventListener('input', () =>{
+       const searchValue = searchInpuElem.value
+        
+       if(searchValue){
+          productSearchBar();
+        }else{
+          allProductsRendering();
+          reRenderHTML(productHTML);
+        }    
       })
 
-    }
+  }
