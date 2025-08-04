@@ -7,11 +7,9 @@ loadProductsFetch().then(()=>{
 function renderProductsGrid(){
         let productHTML = '';
 
-        products.forEach((product) =>{
-
-          productHTML += `
+        function renderProductItem(product){
           
-              <div class="product-container">
+          return(`<div class="product-container">
                   <div class="product-image-container">
                     <img class="product-image"
                       src="${product.image}">
@@ -61,7 +59,12 @@ function renderProductsGrid(){
                   <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id ="${product.id}">
                     Add to Cart
                   </button>
-                </div>`
+                </div>`);
+        }
+
+        products.forEach((product) =>{
+
+          productHTML += renderProductItem(product);
         })
         document.querySelector('.js-product-grid').innerHTML = productHTML;
         const clearIDs = {};
@@ -90,15 +93,29 @@ function renderProductsGrid(){
       const searchInpuElem = document.querySelector('.js-search-bar');
       const searchButtonElem =  document.querySelector('.search-button');
       searchButtonElem.addEventListener('click', () =>{
-        productHTML = '';
-        const searchInputValue = searchInpuElem.value;
+      const searchInputValue = searchInpuElem.value;
+      let productHTML = '';
 
        products.filter((product) =>{
-          const isProductName = product.name.toLowerCase();
-          const searchValue = searchInputValue.toLowerCase()
-          
+          const isProductName = product.name.toLowerCase().trim();
+          const searchValue = searchInputValue.toLowerCase().trim();
           const foundItem = isProductName.includes(searchValue);
-          
+
+
+            if(searchValue === ''){
+              productHTML = `
+                <div>
+                  <h3>No product Found</h3>
+                </div>`
+            }
+
+            if(foundItem){
+              
+              productHTML += renderProductItem(product)
+            
+            }
+          document.querySelector('.js-product-grid').innerHTML = productHTML;
+         
         })
 
       })
