@@ -396,3 +396,14 @@ body, .main, .product-grid-item {
     text-align: center;
   }
 }
+.js-quantity-items{
+  font-size: 18px;
+  line-height: 2;
+  font-weight: 600;
+  color: rgb(11, 30, 64);
+}
+.js-empty-cart-text{
+  font-size: 25px;
+  text-align: center;
+  color: #64748b;
+}

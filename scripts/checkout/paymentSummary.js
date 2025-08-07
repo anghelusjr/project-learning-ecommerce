@@ -1,21 +1,21 @@
 import { cart } from '../../data/cart.js';
 import { formatCurrency } from '../utils/money.js';
+import { getCartQuantity } from '../utils/getCartQuantity.js';
 import { getProduct } from '../../data/products.js';
 import { getDeliveryOption } from '../../data/deliveryOption.js';
 import { addOrder, orders } from '../../data/orders.js';
 
+
 export function renderPaymentSummary() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
-  let cartQuantity = 0;
 
   cart.forEach(cartItem => {
     const product = getProduct(cartItem.productId);
-    productPriceCents += product.priceCents * cartItem.quantity;
+    productPriceCents += product.priceCents * getCartQuantity();
 
     const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
     shippingPriceCents += deliveryOption.priceCents;
-    cartQuantity += cartItem.quantity;
   });
 
   const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
@@ -25,7 +25,7 @@ export function renderPaymentSummary() {
   const paymentSummaryHTML = `
     <div class="payment-summary-title">Order Summary</div>
     <div class="payment-summary-row">
-      <div>Items (${cartQuantity}):</div>
+      <div class="js-quantity-items">Items: (${getCartQuantity()})</div>
       <div class="payment-summary-money">$${formatCurrency(productPriceCents)}</div>
     </div>
     <div class="payment-summary-row">
@@ -50,7 +50,12 @@ export function renderPaymentSummary() {
   document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
 
   document.querySelector('.js-place-order').addEventListener('click', async () => {
-    try{
+    
+    if(getCartQuantity() <= 0){
+      console.log('Opps cart is empty')
+    }else{
+      
+      try{
       const response = await fetch('https://supersimplebackend.dev/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -65,7 +70,9 @@ export function renderPaymentSummary() {
       console.log('Unexpected error. Try again later.');
     }
 
-
     window.location.href = 'orders.html';
+
+    }
+    
   });
 }
