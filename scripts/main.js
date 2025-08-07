@@ -1,4 +1,5 @@
-import {cart, addToCart, updateCartQuantity} from "../data/cart.js";
+import { addToCart} from "../data/cart.js";
+import { getCartQuantity } from "./utils/getCartQuantity.js";
 import {products, loadProductsFetch} from "../data/products.js";
 
 loadProductsFetch().then(()=>{
@@ -77,6 +78,21 @@ function renderProductsGrid(){
         reRenderHTML(productHTML);
 
 
+        function updatedCartQuantity(){
+        const quantityValue = getCartQuantity();
+
+          if(quantityValue === 0){
+            document.querySelector('.js-cart-quantity').innerHTML ='';
+          }else{
+            document.querySelector('.js-cart-quantity').innerHTML = quantityValue;
+          }
+
+        }
+
+        updatedCartQuantity();
+      
+        
+        
         const clearIDs = {};
         document.querySelectorAll('.js-add-to-cart-button').forEach((button) =>{
           button.addEventListener('click', () =>{
@@ -94,9 +110,8 @@ function renderProductsGrid(){
               addedMessage.classList.remove('added-to-cart-visible');
             }, 2000);
 
-
             addToCart(productId, quantityValue);
-            updateCartQuantity();
+            updatedCartQuantity();
           })  
       })
 

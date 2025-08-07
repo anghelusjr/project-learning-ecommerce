@@ -46,7 +46,7 @@
 
         <a class="cart-link header-link" href="checkout.html">
           <img class="cart-icon" src="images/icons/cart-icon.png">
-          <div class="cart-quantity">3</div>
+          <div class="cart-quantity"></div>
           <div class="cart-text">Cart</div>
         </a>
       </div>
@@ -93,10 +93,12 @@
     <strong>Disclaimer:</strong> This is a personal project created for educational and portfolio purposes only. It is not an actual online store and is not affiliated with any brand.
     </div>
     <!-- /* This is for learning purposes no transaction occur on this ecommerce */ -->
+    
+    <script src="scripts/tracking.js" type="module"></script>
     <script>
-      const url = new URL(window.location.href);
-      console.log(url.searchParams.get('orderId'));
-      console.log(url.searchParams.get('productId'));
+      // const url = new URL(window.location.href);
+      // console.log(url.searchParams.get('orderId'));
+      // console.log(url.searchParams.get('productId'));
     </script>
   </body>
 </html>
