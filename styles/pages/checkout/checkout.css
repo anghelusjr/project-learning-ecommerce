@@ -228,8 +228,8 @@ body, .main, .product-grid-item {
 
 .product-grid-action button,
 .place-order-button {
-  background: #333;      /* button background is dark */
-  color: #fff;           /* text color is white */
+  background: #333;    
+  color: #fff;          
   border: 2px solid #2563eb;
   border-radius: 8px;
   padding: 10px 24px;
@@ -237,14 +237,6 @@ body, .main, .product-grid-item {
   font-size: 1.2rem;
   cursor: pointer;
   text-align: center;
-}
-
-/* Remove hover effect */
-.product-grid-action button:hover,
-.place-order-button:hover {
-  background: #333;
-  color: #fff;
-  border-color: #2563eb;
 }
 
 .payment-summary-title,
@@ -406,4 +398,9 @@ body, .main, .product-grid-item {
   font-size: 25px;
   text-align: center;
   color: #64748b;
+}
+
+
+.js-empty-cart{
+  color: #a32201;
 }

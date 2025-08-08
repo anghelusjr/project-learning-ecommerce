@@ -1,6 +1,8 @@
 import {orders} from '../data/orders.js';
 import {loadProductsFetch, getProduct} from '../data/products.js';
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {formatCurrency} from './utils/money.js';
+import { getCartQuantity } from './utils/getCartQuantity.js';
 
 
   async function loadPage(){
@@ -18,19 +20,25 @@ function renderOrderSummary() {
   const orderHtml = orderHeaderHtml();
   const orderSummaryElement = document.querySelector('.js-orders-grid');
   orderSummaryElement.innerHTML = orderHtml;
+  document.querySelector('.cart-quantity').innerHTML = getCartQuantity();
 }
+
 
 function orderHeaderHtml() {
   let orderHeader = '';
 
   orders.forEach((orderItem) => {
+
+  const date = dayjs(orderItem.orderTime)
+  .format('YYYY-  MMM-DD hh:mma');
+
     orderHeader += `
       <div class="order-container">
         <div class="order-header">
           <div class="order-header-left-section">
             <div class="order-date">
               <div class="order-header-label">Order Placed:</div>
-              <div>${orderItem.orderTime}</div>
+              <div>${date}</div>
             </div>
             <div class="order-total">
               <div class="order-header-label">Total:</div>
@@ -92,3 +100,7 @@ function orderDetailsGrid(products) {
 
   return orderDetailsHtml;
 }
+
+document.querySelectorAll('.buy-again-button').forEach((buyAgainButton) =>{
+  console.log(buyAgainButton);
+})

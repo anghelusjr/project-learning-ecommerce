@@ -1,4 +1,4 @@
-import { cart } from '../../data/cart.js';
+import { cart, saveToStorage } from '../../data/cart.js';
 import { formatCurrency } from '../utils/money.js';
 import { getCartQuantity } from '../utils/getCartQuantity.js';
 import { getProduct } from '../../data/products.js';
@@ -49,12 +49,14 @@ export function renderPaymentSummary() {
 
   document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
 
+
   document.querySelector('.js-place-order').addEventListener('click', async () => {
     
     if(getCartQuantity() <= 0){
-      console.log('Opps cart is empty')
+      document.querySelector('.js-empty-cart-text')
+      .classList.add('js-empty-cart');
     }else{
-      
+
       try{
       const response = await fetch('https://supersimplebackend.dev/orders', {
       method: 'POST',
@@ -70,8 +72,9 @@ export function renderPaymentSummary() {
       console.log('Unexpected error. Try again later.');
     }
 
+    cart.splice(0, cart.length)
+    saveToStorage();
     window.location.href = 'orders.html';
-
     }
     
   });
