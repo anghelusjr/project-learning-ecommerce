@@ -1,11 +1,12 @@
-import {orders} from '../data/orders.js';
+import {orders, getOrder} from '../data/orders.js';
 import {loadProductsFetch, getProduct} from '../data/products.js';
-import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+import { getDateFormat } from './utils/dateFormat.js';
 import {formatCurrency} from './utils/money.js';
 import { getCartQuantity } from './utils/getCartQuantity.js';
+import {addToCart, saveToStorage} from '../data/cart.js'
 
 
-  async function loadPage(){
+  async function initializeProductPage(){
     try{
       await loadProductsFetch();
       renderOrderSummary();
@@ -14,23 +15,30 @@ import { getCartQuantity } from './utils/getCartQuantity.js';
     }
   }
 
-loadPage();
+initializeProductPage();
 
 function renderOrderSummary() {
   const orderHtml = orderHeaderHtml();
   const orderSummaryElement = document.querySelector('.js-orders-grid');
   orderSummaryElement.innerHTML = orderHtml;
   document.querySelector('.cart-quantity').innerHTML = getCartQuantity();
+
+  document.querySelectorAll('.js-buy-again-button').forEach((button) =>{  
+  button.addEventListener('click', ()=>{
+    const productId = button.dataset.productId;
+    addToCart(productId, 1)
+    saveToStorage();
+    initializeProductPage(); 
+  })
+});
+
 }
 
 
 function orderHeaderHtml() {
   let orderHeader = '';
-
   orders.forEach((orderItem) => {
-
-  const date = dayjs(orderItem.orderTime)
-  .format('YYYY-  MMM-DD hh:mma');
+  const date = getDateFormat(orderItem.orderTime, 'YYYY-  MMM-DD hh:mma')
 
     orderHeader += `
       <div class="order-container">
@@ -51,19 +59,22 @@ function orderHeaderHtml() {
           </div>
         </div>   
 
-        ${orderDetailsGrid(orderItem.products)}
+        ${orderDetailsGrid(orderItem.products, orderItem)}
       </div> 
     `;
   });
 
   return orderHeader;
 }
-function orderDetailsGrid(products) {
+function orderDetailsGrid(products, orderItem) {
   let orderDetailsHtml = '';
 
   for (let i = 0; i < products.length; i++) {
     const productData = products[i];
     const matchedProduct = getProduct(productData.productId);
+    const deliveryTime = productData.estimatedDeliveryTime
+    const date = getDateFormat(deliveryTime, 'YYYY MMM DD');
+  
 
     if (matchedProduct) {
       orderDetailsHtml += `
@@ -75,20 +86,20 @@ function orderDetailsGrid(products) {
           <div class="product-details"> 
             <div class="product-name">${matchedProduct.name}</div>
             <div class="product-delivery-date">
-              Arriving on: ${productData.estimatedDeliveryTime || ''}
+              Arriving on: ${date || ''}
             </div>
             <div class="product-quantity">
               Quantity: ${productData.quantity || 1}
             </div>
-            <button class="buy-again-button button-primary">
+            <button class="buy-again-button button-primary js-buy-again-button" data-product-id=${productData.productId}>
               <img class="buy-again-icon" src="images/icons/buy-again.png">
               <span class="buy-again-message">Buy it again</span>
             </button>
           </div>
 
           <div class="product-actions">
-            <a href="tracking.html">
-              <button class="track-package-button button-secondary">
+            <a href=tracking.html?productId=${productData.productId}&orderId=${orderItem.id}>
+              <button class="track-package-button button-secondary js-track-package-button">
                 Track package
               </button>
             </a>
@@ -101,6 +112,4 @@ function orderDetailsGrid(products) {
   return orderDetailsHtml;
 }
 
-document.querySelectorAll('.buy-again-button').forEach((buyAgainButton) =>{
-  console.log(buyAgainButton);
-})
+ 
