@@ -77,8 +77,24 @@
   height: 100%;
   background-color: green;
   border-radius: 50px;
-  width: 50%;
+  width: 0%;
+  animation-name: progress;
+  animation-duration: 5s;
+  animation-timing-function: ease;
+  animation-delay: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
+
+@keyframes progress {
+  0%{
+    width: 0%;
+  }
+  100%{
+    width: 50%;
+  }
+}
+
 .disclaimer {
   background-color: #0b1e40;
   color: #ffffff;

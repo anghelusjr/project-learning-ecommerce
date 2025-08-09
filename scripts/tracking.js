@@ -28,9 +28,6 @@ function renderOrderProduct() {
   orders.forEach((orderItem) =>{
     orderItem.products.forEach((product) =>{
 
-      // console.log(product);
-      // console.log(orders);
-
       if(orderItem.id === orderUrl){
 
         if(product.productId === productUrl){
